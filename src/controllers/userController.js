@@ -196,3 +196,20 @@ export const resetPassword = async (req, res) => {
     res.status(500).json({ message: "Error al enviar correo de recuperación" });
   }
 };
+
+export const getUserByCorreo = async (req, res) => {
+  const { correo } = req.params;
+
+  try {
+    const user = await User.findOne({ where: { username: correo } });
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    return res.status(200).json(user);
+  } catch (error) {
+    console.error("Error al obtener usuario:", error);
+    res.status(500).json({ message: "Error al obtener usuario" });
+  }
+};
