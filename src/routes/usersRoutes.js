@@ -1,5 +1,7 @@
 import express from 'express';
 import { getUsers, createUser, updateUser, deleteUser, login, resetPassword } from '../controllers/userController.js';
+import { getUserByCorreo } from '../controllers/userController.js';
+
 
 const router = express.Router();
 
@@ -159,5 +161,8 @@ router.post('/login', login);
  *         description: User not found
  */
 router.post('/reset-password', resetPassword);
+
+router.get('/:correo', getUserByCorreo);
+
 
 export default router;
